@@ -24,3 +24,5 @@ Square 2170×2170. Paper #F7E6D4, ink #1A1613, convergence red #A93B2A (only red
 
 ## Controls
 Feedback (polarity, grid, target, patience) · Marks (density, depth) · Style (wobble) · Run (read-only outcome) · randomize / refresh / svg / png · click canvas = new seed.
+
+**`depth` (3/4/5, default 5) = mark scale.** It caps subdivision recursion in `subdivideCell` (`depth < maxDepth`), so lower = larger/coarser glyphs, higher = finer/smaller. The `size > cs / 180` term is only a safety floor (~12px) — it sits below the smallest cell any in-range depth produces, so maxDepth is what binds. Note the historical quirk: the original Field Script depth range was [5,6,7] but the size floor was `cs/64` (~34px), which capped subdivision at ~depth 4 — so 5/6/7 all rendered identically and the control was inert. Fixed 2026-07-07 by moving the range to [3,4,5] and dropping the floor to cs/180. Don't restore the higher range or raise the floor without re-checking depth still binds.

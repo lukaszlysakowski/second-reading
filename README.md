@@ -43,7 +43,7 @@ The system also decides for itself when it is finished. A homeostat — Ross Ash
 | Feedback | target | steering band — Sparse / Balanced / Dense |
 | Feedback | patience | Quick ε=.02×6 / Standard ε=.012×9 / Long ε=.007×14 |
 | Marks | density | Light / Medium / Dense strokes per cell |
-| Marks | depth | subdivision depth 5 / 6 / 7 |
+| Marks | depth | subdivision depth 3 / 4 / 5 — coarse (large glyphs) to fine (small dense marks) |
 | Style | wobble | hand-jitter on all marks — on / off |
 | Run | outcome | read-only: `gens: K · converged · attract` |
 | — | randomize | reroll all parameters + new seed |

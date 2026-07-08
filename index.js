@@ -14,7 +14,7 @@ const GAIN_MIN = 0.15, GAIN_MAX = 4.0;
 const VIABILITY = [0.05, 0.75];
 
 let state = { masterSeed: 0, generations: [], polarity: null, converged: false, convergenceMarks: [] };
-let ui = { polarity: 'auto', grid: 1, target: 1, patience: 1, density: 1, depth: 6, wobble: true };
+let ui = { polarity: 'auto', grid: 1, target: 1, patience: 1, density: 1, depth: 5, wobble: true };
 
 function setup() {
     let c = createCanvas(CS, CS);
@@ -176,7 +176,7 @@ const CONTROL_DEFS = [
     ['targetBtn',   'targetVal',   [0,1,2], ['Sparse','Balanced','Dense'], 'target'],
     ['patienceBtn', 'patienceVal', [0,1,2], ['Quick','Standard','Long'], 'patience'],
     ['densityBtn',  'densityVal',  [0,1,2], ['Light','Medium','Dense'], 'density'],
-    ['depthBtn',    'depthVal',    [5,6,7], null, 'depth'],
+    ['depthBtn',    'depthVal',    [3,4,5], null, 'depth'],
     ['wobbleBtn',   'wobbleVal',   [true,false], ['on','off'], 'wobble']
 ];
 
@@ -352,8 +352,13 @@ function subdivideCell(G, x, y, size, depth) {
     let mid      = { x: x + size / 2, y: y + size / 2 };
     let density  = densityAt(G, mid.x, mid.y);
 
+    // `depth` (3/4/5) is the real mark-scale control: it caps recursive
+    // splits, so lower = larger cells/coarser glyphs, higher = finer. The
+    // size term is now just a safety floor (cs/180 ≈ 12px) that stops
+    // pathologically small cells; it sits below the min cell any depth in
+    // range produces, so maxDepth — not the floor — is what binds.
     let shouldSplit = depth < maxDepth
-        && size > cs / 64
+        && size > cs / 180
         && random() < density * 0.85;
 
     if (shouldSplit) {
