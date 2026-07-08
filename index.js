@@ -24,7 +24,8 @@ function setup() {
     document.getElementById('randomizeBtn').onclick = randomizeAll;
     document.getElementById('refreshBtn').onclick   = () => regenerate(true);
     document.getElementById('svgBtn').onclick = exportSVG;
-    document.getElementById('pngBtn').onclick = exportPNG;
+    document.getElementById('pngBtn').onclick = () => exportPNG(1);
+    document.getElementById('png4xBtn').onclick = () => exportPNG(4);
     regenerate(true);
     noLoop();
 }
@@ -236,7 +237,22 @@ function exportSVG() {
     URL.revokeObjectURL(url);
 }
 
-function exportPNG() { saveCanvas(`second-reading_${state.masterSeed}`, 'png'); }
+function exportPNG(scale = 1) {
+    const name = `second-reading_${state.masterSeed}${scale > 1 ? '_' + scale + 'x' : ''}`;
+    if (scale > 1) {
+        // Re-render the same composition into a higher-density backing buffer
+        // (2170 → 2170×scale px) and save that, then restore the 1× display.
+        // renderAll reads state.generations, so the output is identical, just
+        // finer; wobble is seeded from geometry so it reproduces exactly.
+        pixelDensity(scale);
+        renderAll();
+        saveCanvas(name, 'png');
+        pixelDensity(1);
+        renderAll();
+    } else {
+        saveCanvas(name, 'png');
+    }
+}
 
 // ─── grid kit ─── pure math: how the system reads its own ink.
 

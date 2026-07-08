@@ -23,6 +23,6 @@ Cybernetic Serendipity (ICA 1968), Pask's Colloquy of Mobiles, Ashby's homeostat
 Square 2170×2170. Paper #F7E6D4, ink #1A1613, convergence red #A93B2A (only red on the page). Sidebar CSS WCAG-tuned (--muted #969082, .ctrl min-height 24px) — Lighthouse a11y 100; don't regress.
 
 ## Controls
-Feedback (polarity, grid, target, patience) · Marks (density, depth) · Style (wobble) · Run (read-only outcome) · randomize / refresh / svg / png · click canvas = new seed.
+Feedback (polarity, grid, target, patience) · Marks (density, depth) · Style (wobble) · Run (read-only outcome) · randomize / refresh / svg / png / png 4x · click canvas = new seed. `exportPNG(scale)` uses `pixelDensity(scale)` to re-render at 4x (8680×8680) then restores the 1x display — no drawing-code changes, wobble is geometry-seeded so hi-res is pixel-faithful.
 
 **`depth` (3/4/5, default 5) = mark scale.** It caps subdivision recursion in `subdivideCell` (`depth < maxDepth`), so lower = larger/coarser glyphs, higher = finer/smaller. The `size > cs / 180` term is only a safety floor (~12px) — it sits below the smallest cell any in-range depth produces, so maxDepth is what binds. Note the historical quirk: the original Field Script depth range was [5,6,7] but the size floor was `cs/64` (~34px), which capped subdivision at ~depth 4 — so 5/6/7 all rendered identically and the control was inert. Fixed 2026-07-07 by moving the range to [3,4,5] and dropping the floor to cs/180. Don't restore the higher range or raise the floor without re-checking depth still binds.

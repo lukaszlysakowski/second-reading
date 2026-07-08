@@ -48,7 +48,7 @@ The system also decides for itself when it is finished. A homeostat — Ross Ash
 | Run | outcome | read-only: `gens: K · converged · attract` |
 | — | randomize | reroll all parameters + new seed |
 | — | refresh | new seed, same parameters |
-| — | svg / png | export |
+| — | svg / png / png 4x | export (png 4x renders the composition at 8680×8680) |
 
 Click the canvas for a new seed. Every run is deterministic in (seed, parameters); the whole loop executes synchronously on regeneration.
 
@@ -69,7 +69,7 @@ One Inkscape pen pass per generation, bottom to top:
 3. **Convergence** — the red marks
 4. **Signature** — seed, generation count, verdict, timestamp
 
-Plot any prefix of the Gen passes to physically replay the system's run — stop at Gen 3 and you hold the page as the system saw it mid-thought. Files are named `second-reading_<seed>.svg` / `.png`.
+Plot any prefix of the Gen passes to physically replay the system's run — stop at Gen 3 and you hold the page as the system saw it mid-thought. Files are named `second-reading_<seed>.svg` / `.png`, and the **png 4x** button exports a 8680×8680 raster (`_4x.png`) for large prints.
 
 ---
 
