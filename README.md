@@ -4,7 +4,7 @@
 
 **[Live demo →](https://lukaszlysakowski.github.io/second-reading/)**
 
-> *A trio of self-referential systems — **Second Reading rereads itself**, [Interference](https://github.com/lukaszlysakowski/interference) tunes itself, [Drift](https://github.com/lukaszlysakowski/drift) remembers itself.*
+> ***Second Reading rereads itself**, [Interference](https://github.com/lukaszlysakowski/interference) tunes itself, [Drift](https://github.com/lukaszlysakowski/drift) remembers itself — and [Attrition](https://github.com/lukaszlysakowski/attrition) forgets itself.*
 
 ---
 
